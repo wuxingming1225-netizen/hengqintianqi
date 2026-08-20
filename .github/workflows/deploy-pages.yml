@@ -32,6 +32,9 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -39,11 +42,11 @@ jobs:
         run: pnpm build:pages
         env:
           GITHUB_PAGES: "true"
-          NEXT_PUBLIC_BASE_PATH: "/t3-property-site"
-          NEXT_PUBLIC_SITE_URL: "https://wuxingming1225-netizen.github.io"
+          NEXT_PUBLIC_BASE_PATH: "/${{ github.event.repository.name }}"
+          NEXT_PUBLIC_SITE_URL: "https://${{ github.repository_owner }}.github.io"
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./out
 
