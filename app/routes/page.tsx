@@ -8,9 +8,10 @@ import { PageHero, SectionTitle, SiteFooter, SiteHeader } from "../site-chrome";
 
 type RouteSlide = readonly [image: string, title: string, text: string];
 type RouteGroup = { label: string; eyebrow: string; intro: string; note: string; slides: readonly RouteSlide[] };
+type ParkingAccessItem = { title: string; eyebrow: string; image: string; fullImage?: string; items: readonly string[] };
 
 function parkingStep(number: number, title: string, text: string): RouteSlide {
-  return [`/parking-route-step-${String(number).padStart(2, "0")}-full.webp`, title, text];
+  return [`/parking-route-step-${String(number).padStart(2, "0")}.webp`, title, text];
 }
 
 const b1LowMiddleSlides = [
@@ -92,7 +93,7 @@ const routeLabels: Record<RouteKey, string> = {
 };
 const routeKeys: RouteKey[] = ["access", "parking", "freight", "takeout"];
 
-const parkingAccess = [
+const parkingAccess: readonly ParkingAccessItem[] = [
   {
     title: "访客与闸机通行",
     eyebrow: "VISITOR & ACCESS",
@@ -109,12 +110,14 @@ const parkingAccess = [
     title: "停车月卡申请",
     eyebrow: "PARKING APPLY",
     image: "/parking-apply.webp",
+    fullImage: "/parking-apply.jpg",
     items: ["进入“爱泊客”小程序", "选择“横琴华发商都停车场”", "上传资料并等待管家审核", "审核通过后在线缴费，建议提前两个工作日申请"],
   },
   {
-    title: "停车月卡续费",
-    eyebrow: "PARKING RENEWAL",
+    title: "停车月卡缴费",
+    eyebrow: "PARKING PAYMENT",
     image: "/parking-renewal.webp",
+    fullImage: "/parking-renewal.jpg",
     items: ["在月卡到期前进入“长租套餐”完成续费", "逾期后原套餐自动失效", "逾期需结清临停费用并重新提交月租申请", "已生效费用不予退款，不可中途更换车牌"],
   },
 ];
@@ -198,7 +201,7 @@ export default function RoutesPage() {
   return (
     <main>
       <SiteHeader active="routes" />
-      <PageHero eyebrow="ROUTE GUIDANCE" title="路线指引" subtitle="清晰抵达，从容通行" image="/routes-hero-security.jpg" imageClassName="route-security-hero" index="03" variant="large" />
+      <PageHero eyebrow="ROUTE GUIDANCE" title="路线指引" subtitle="清晰抵达，从容通行" image="/routes-hero-security.webp" imageClassName="route-security-hero" index="03" variant="large" />
 
       <section className="content-section route-page page-shell">
         <SectionTitle eyebrow="SELECT A ROUTE" title="选择您要查看的路线" intro="点击分类查看对应内容；分步路线支持左右滑动浏览。" />
@@ -206,7 +209,12 @@ export default function RoutesPage() {
 
         {active === "access" && <section className="parking-access-section">
           <div className="subsection-heading"><span>PARKING & ACCESS</span><h2>停车与通行</h2><p>从来访报备到月卡办理，常用事项集中查看。</p></div>
-          <div className="parking-access-grid">{parkingAccess.map((item) => <article key={item.title}><div><img src={asset(item.image)} alt={item.title} loading="lazy" decoding="async" /></div><span>{item.eyebrow}</span><h3>{item.title}</h3><ol>{item.items.map((text) => <li key={text}>{text}</li>)}</ol></article>)}</div>
+          <div className="parking-access-grid">{parkingAccess.map((item) => <article className={item.fullImage ? "has-clear-image" : undefined} key={item.title}>
+            <div className="parking-access-media">{item.fullImage
+              ? <a className="parking-clear-link" href={asset(item.fullImage)} target="_blank" rel="noreferrer" aria-label={`${item.title}：在新窗口打开清晰原图`}><img src={asset(item.image)} alt={`${item.title}流程图，含小程序码`} loading="lazy" decoding="async" /><span className="parking-clear-cta">查看清晰原图 · 长按识别小程序码 ↗</span></a>
+              : <img src={asset(item.image)} alt={item.title} loading="lazy" decoding="async" />}</div>
+            <span>{item.eyebrow}</span><h3>{item.title}</h3><ol>{item.items.map((text) => <li key={text}>{text}</li>)}</ol>
+          </article>)}</div>
         </section>}
 
         {active === "parking" && <section className="parking-zone-panel" aria-label="选择停车办公分区">

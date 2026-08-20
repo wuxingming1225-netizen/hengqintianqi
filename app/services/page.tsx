@@ -22,12 +22,12 @@ export default function ServicesPage() {
       </section>
 
       <section className="service-block page-shell" id="premium">
-        <div className="service-photo premium-photo"><img src={asset("/premium-supplies-v2.webp")} alt="T3 大堂臻品物资箱" /><span>01</span></div>
+        <div className="service-photo premium-photo"><img src={asset("/premium-supplies-v2.webp")} alt="T3 大堂臻品物资箱" width="1400" height="800" loading="lazy" decoding="async" /><span>01</span></div>
         <div className="service-text"><span>PREMIUM SERVICE</span><h2>甄品服务</h2><p>大堂臻品物资箱为客户提供干湿纸巾、女性用品、雨衣、针线包、后跟贴、漱口水、一次性毛巾、吹风机、充电宝、测温枪与日常维修工具等暖心物资。</p><ul><li>应急物品随取随用</li><li>便民物品登记借用</li><li>一楼大堂统一提供</li></ul></div>
       </section>
 
       <section className="service-block reverse compact-service page-shell" id="sanitation">
-        <div className="service-photo sanitation-photo"><img src={asset("/sanitation-service-single.webp")} alt="华发物业开展公共区域日常消杀" loading="lazy" decoding="async" /><span>02</span><div><b>日常消杀</b><small>公共区域规范作业</small></div></div>
+        <div className="service-photo sanitation-photo"><img src={asset("/sanitation-service-single.webp")} alt="华发物业开展公共区域日常消杀" width="1200" height="900" loading="lazy" decoding="async" /><span>02</span><div><b>日常消杀</b><small>公共区域规范作业</small></div></div>
         <div className="service-text"><span>SANITATION SERVICE</span><h2>消杀服务</h2><p>围绕公共区域、电梯轿厢、卫生间和高频接触点位开展周期性清洁消杀，结合日常巡检与专项作业，保持楼宇环境整洁安心。</p><ul><li>公共区域定期消杀</li><li>重点点位专项清洁</li><li>作业过程记录留档</li></ul></div>
       </section>
 

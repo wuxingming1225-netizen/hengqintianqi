@@ -22,9 +22,9 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.doesNotMatch(project, /总用地面积/);
   assert.doesNotMatch(project, /金融岛标杆商务地标|一座楼宇，一群用心的人/);
   assert.doesNotMatch(project, /Tight Management/);
-  assert.match(project, /security-monitoring-v2\.png/);
-  assert.match(project, /tight-security-management\.jpg/);
-  assert.match(project, /equipment-safety\.png/);
+  assert.match(project, /security-monitoring-v2\.webp/);
+  assert.match(project, /tight-security-management\.webp/);
+  assert.match(project, /equipment-safety\.webp/);
   assert.match(project, /7×24 小时无间断安全管理，实时掌握楼宇安全动态。/);
   assert.doesNotMatch(project, /中央监控系统|身份识别系统|先进设备/);
   assert.doesNotMatch(project, /夜间货物进出|人车分流|客货分流|物流交接效率/);
@@ -39,10 +39,14 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.match(services, /service-hero-reception\.webp/);
   assert.doesNotMatch(services, /class="parking-access-section"|服务影像预留|class="security-section"/);
 
-  for (const text of ["停车与通行", "访客与闸机通行", "临时报备停车", "停车月卡申请", "停车月卡续费", "停车场指引", "货梯路线指引", "外卖点指引"])
+  for (const text of ["停车与通行", "访客与闸机通行", "临时报备停车", "停车月卡申请", "停车月卡缴费", "停车场指引", "货梯路线指引", "外卖点指引"])
     assert.match(routes, new RegExp(text));
   assert.match(routes, /route-selector four-items/);
-  assert.match(routes, /routes-hero-security\.jpg/);
+  assert.match(routes, /routes-hero-security\.webp/);
+  assert.match(routes, /parking-apply\.jpg/);
+  assert.match(routes, /parking-renewal\.jpg/);
+  assert.match(routes, /查看清晰原图 · 长按识别小程序码/);
+  assert.match(routes, /target="_blank"/);
   assert.match(routes, /\?view=access/);
   for (const text of ["四个办公分区停车指引", "低区", "11–16F", "中区", "17–27F", "高区", "28–38F", "超高区", "39–49F", "B1 推荐路线", "B2 / B3 路线"])
     assert.match(routesSource, new RegExp(text));
@@ -64,10 +68,10 @@ test("keeps major information on separate IFC-style pages", async () => {
 
 test("keeps required image assets available", async () => {
   const files = [
-    "t3-building.jpg", "t3-building-logo-transparent.png", "t3-building-lineart.webp", "premium-supplies-v2.webp", "sanitation-service-single.webp", "security-monitoring-v2.png", "tight-security-management.jpg", "equipment-safety.png", "service-hero-reception.webp", "routes-hero-security.jpg", "t3-property-poster-v1.png",
+    "t3-building.webp", "t3-building-logo-transparent.webp", "t3-building-lineart.webp", "premium-supplies-v2.webp", "sanitation-service-single.webp", "security-monitoring-v2.webp", "tight-security-management.webp", "equipment-safety.webp", "service-hero-reception.webp", "routes-hero-security.webp", "t3-property-poster-v1.png", "t3-property-poster-hengqintianqi.png",
     "shared-umbrella-station.webp", "umbrella-sleeve-machine.webp", "umbrella-dryer.webp", "shoe-polisher.webp",
-    "access-gate-preview.jpg", "temporary-parking-entrance-preview.webp", "parking-apply.webp", "parking-renewal.webp",
-    ...Array.from({ length: 13 }, (_, index) => `parking-route-step-${String(index + 1).padStart(2, "0")}-full.webp`),
+    "access-gate-preview.jpg", "temporary-parking-entrance-preview.webp", "parking-apply.webp", "parking-apply.jpg", "parking-renewal.webp", "parking-renewal.jpg",
+    ...Array.from({ length: 13 }, (_, index) => `parking-route-step-${String(index + 1).padStart(2, "0")}.webp`),
     "wuxingming-cutout.webp", "zeng-linghui-cutout.webp", "he-sihui-cutout.webp", "liu-daping-cutout.webp",
     "zhou-zhiying-cutout.webp", "liang-panpan-cutout.webp", "liu-jiaxin-cutout.webp", "liu-liuhu-cutout.webp", "hou-huanwu-cutout.webp",
   ];

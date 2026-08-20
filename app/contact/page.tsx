@@ -35,7 +35,7 @@ export default function ContactPage() {
   return (
     <main>
       <SiteHeader active="contact" />
-      <PageHero eyebrow="CONTACT US" title="联系我们" subtitle="专业、可靠，始终在场" image="/t3-building.jpg" index="04" />
+      <PageHero eyebrow="CONTACT US" title="联系我们" subtitle="专业、可靠，始终在场" image="/t3-building.webp" index="04" />
 
       <section className="content-section team-section page-shell">
         <SectionTitle eyebrow="PROPERTY TEAM" title="您的专属物业团队" intro="从大堂接待、楼层服务到选品中心运营，我们以清晰分工和一致标准响应每一项需要。" />

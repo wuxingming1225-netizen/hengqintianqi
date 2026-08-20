@@ -14,7 +14,7 @@ export function SiteHeader({ active }: { active: Section }) {
   return (
     <header className="site-header">
       <a className="site-brand" href={pageHref("/")} onClick={close} aria-label="横琴天啟 T3 首页">
-        <span className="site-brand-mark"><img src={asset("/t3-building-logo-transparent.png")} alt="" /></span>
+        <span className="site-brand-mark"><img src={asset("/t3-building-logo-transparent.webp")} alt="" width="256" height="542" decoding="async" /></span>
         <span><strong>横琴天啟 T3</strong><small>PROPERTY SERVICE</small></span>
       </a>
       <button className="menu-toggle" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="打开导航"><span /><span /></button>
@@ -50,7 +50,7 @@ export function SiteHeader({ active }: { active: Section }) {
 export function PageHero({ eyebrow, title, subtitle, image, index, variant, imageClassName }: { eyebrow: string; title: string; subtitle?: string; image: string; index: string; variant?: "large"; imageClassName?: string }) {
   return (
     <section className={`page-hero ${variant === "large" ? "home-hero" : ""}`}>
-      <img className={imageClassName} src={asset(image)} alt="" />
+      <img className={imageClassName} src={asset(image)} alt="" decoding="async" fetchPriority="high" />
       <div className="page-hero-shade" />
       <div className="page-hero-copy page-shell">
         <span>{eyebrow}</span>
@@ -70,7 +70,7 @@ export function SiteFooter() {
   return (
     <footer>
       <div className="page-shell footer-inner">
-        <a className="footer-brand" href={pageHref("/")}><span className="footer-logo"><img src={asset("/t3-building-logo-transparent.png")} alt="" /></span><span>横琴天啟 T3<br /><small>PROPERTY SERVICE</small></span></a>
+        <a className="footer-brand" href={pageHref("/")}><span className="footer-logo"><img src={asset("/t3-building-logo-transparent.webp")} alt="" width="256" height="542" loading="lazy" decoding="async" /></span><span>横琴天啟 T3<br /><small>PROPERTY SERVICE</small></span></a>
         <p>珠海华发物业服务有限公司</p>
         <p>© 2026 HUAFA PROPERTY. ALL RIGHTS RESERVED.</p>
       </div>

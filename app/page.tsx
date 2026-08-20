@@ -30,7 +30,7 @@ export default function ProjectPage() {
               <h2>关于横琴天啟 T3</h2>
             </div>
             <div className="project-landmark-photo">
-              <img src={asset("/t3-building.jpg")} alt="横琴天啟 T3 建筑主体与金融岛景观" />
+              <img src={asset("/t3-building.webp")} alt="横琴天啟 T3 建筑主体与金融岛景观" width="1600" height="1039" decoding="async" />
             </div>
           </div>
           <div className="project-landmark-stats" aria-label="横琴天啟 T3 建筑数据">
@@ -81,7 +81,7 @@ export default function ProjectPage() {
             <article><h3>实时监控</h3><p>7×24 小时无间断安全管理，实时掌握楼宇安全动态。</p></article>
             <article><h3>安全管理</h3><p>严格实施人员、物品出入管理，定期开展消防安全培训与检查服务，确保人身与财产安全。</p></article>
           </div>
-          <div className="security-photo-composition monitoring-composition"><img src={asset("/security-monitoring-v2.png")} alt="T3 监控中心实时安全管理" loading="lazy" decoding="async" /><div aria-hidden="true" /></div>
+          <div className="security-photo-composition monitoring-composition"><img src={asset("/security-monitoring-v2.webp")} alt="T3 监控中心实时安全管理" width="836" height="557" loading="eager" decoding="async" /><div aria-hidden="true" /></div>
         </div>
 
         <div className="page-shell tight-story">
@@ -92,7 +92,7 @@ export default function ProjectPage() {
             <article><h3>风险管理</h3><p>建立完善的风险管理体系，科学识别并有效管控日常运营风险，保障安全办公环境。</p></article>
             <article><h3>应急预案</h3><p>建立科学的应急预案体系和分级响应机制，确保突发情况处理高效有序。</p></article>
           </div>
-          <div className="security-photo-composition tight-composition"><img src={asset("/tight-security-management.jpg")} alt="T3 安管团队开展防暴应急演练" loading="lazy" decoding="async" /><div aria-hidden="true" /></div>
+          <div className="security-photo-composition tight-composition"><img src={asset("/tight-security-management.webp")} alt="T3 安管团队开展防暴应急演练" width="1200" height="900" loading="eager" decoding="async" /><div aria-hidden="true" /></div>
         </div>
 
         <div className="page-shell security-story equipment-story">
@@ -101,7 +101,7 @@ export default function ProjectPage() {
           <div className="security-story-copy">
             <article><h3>守护企业生命线</h3><p>电力和网络被视为企业的“生命线”。服务中心建立起 24 小时值守机制。在工程端，重点保障电力和动力设施持续稳定输出，避免因供电波动影响跨时区直播和服务器运行。</p></article>
           </div>
-          <div className="security-photo-composition equipment-composition"><img src={asset("/equipment-safety.png")} alt="工程人员开展电力设备安全检查" loading="lazy" decoding="async" /><div aria-hidden="true" /></div>
+          <div className="security-photo-composition equipment-composition"><img src={asset("/equipment-safety.webp")} alt="工程人员开展电力设备安全检查" width="839" height="557" loading="eager" decoding="async" /><div aria-hidden="true" /></div>
         </div>
       </section>
 
