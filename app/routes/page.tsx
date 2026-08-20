@@ -30,18 +30,15 @@ const b1HighSuperSlides = [
 
 const b23LowMiddleSlides = [
   parkingStep(7, "驶出通道后右转", "从负二层或负三层通道驶出后按图示方向右转。"),
-  parkingStep(8, "在1分区路口左转", "抵达1分区路口后左转，继续沿车道行驶。"),
-  parkingStep(10, "沿3分区方向左转", "经过3分区路口后按图示方向左转。"),
+  parkingStep(9, "在1分区路口直行", "抵达1分区路口后保持直行，继续沿车道前进。"),
+  parkingStep(11, "沿B3方向继续直行", "认准B3、酒店及公寓方向标识后继续直行。"),
   parkingStep(12, "跟随T3办公电梯标识", "看到“T3办公电梯”标识后左转并就近停车。"),
   parkingStep(13, "抵达T3办公电梯入口", "停好车辆后步行进入T3办公电梯厅。"),
 ] as const;
 
 const b23HighSuperSlides = [
-  parkingStep(7, "驶出通道后右转", "从负二层或负三层通道驶出后按图示方向右转。"),
-  parkingStep(9, "在1分区路口直行", "抵达1分区路口后保持直行，继续沿车道前进。"),
-  parkingStep(11, "沿B3方向继续直行", "认准B3、酒店及公寓方向标识后继续直行。"),
-  parkingStep(12, "跟随T3办公电梯标识", "看到“T3办公电梯”标识后左转并就近停车。"),
-  parkingStep(13, "抵达T3办公电梯入口", "停好车辆后步行进入T3办公电梯厅。"),
+  parkingStep(7, "下斜坡进入停车层", "沿斜坡驶入负二层或负三层，到达1分区。"),
+  parkingStep(8, "在1分区左转即达", "抵达1分区后左转，即可到达高区、超高区办公电梯厅停车区域。"),
 ] as const;
 
 type ParkingZoneKey = "low" | "middle" | "high" | "super";

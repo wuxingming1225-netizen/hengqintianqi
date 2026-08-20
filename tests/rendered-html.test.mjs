@@ -44,6 +44,11 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.match(routes, /\?view=access/);
   for (const text of ["四个办公分区停车指引", "低区", "11–16F", "中区", "17–27F", "高区", "28–38F", "超高区", "39–49F", "B1 推荐路线", "B2 / B3 路线"])
     assert.match(routesSource, new RegExp(text));
+  const lowMiddleB23 = routesSource.match(/const b23LowMiddleSlides = \[([\s\S]*?)\] as const;/)?.[1] ?? "";
+  const highSuperB23 = routesSource.match(/const b23HighSuperSlides = \[([\s\S]*?)\] as const;/)?.[1] ?? "";
+  assert.deepEqual([...lowMiddleB23.matchAll(/parkingStep\((\d+)/g)].map((match) => Number(match[1])), [7, 9, 11, 12, 13]);
+  assert.deepEqual([...highSuperB23.matchAll(/parkingStep\((\d+)/g)].map((match) => Number(match[1])), [7, 8]);
+  assert.match(highSuperB23, /在1分区左转即达/);
 
   for (const person of ["吴幸明", "曾令慧", "何思慧", "刘大平", "周芷盈", "梁盼盼", "刘嘉欣", "刘六虎", "侯焕武"])
     assert.match(contact, new RegExp(person));
@@ -80,6 +85,7 @@ test("keeps type, navigation and responsive presentation consistent", async () =
   assert.doesNotMatch(viewTimelineBlock, /security-story|tight-story/);
   assert.match(css, /\.parking-zone-selector/);
   assert.match(css, /\.route-selector \{ position: sticky/);
+  assert.match(css, /\.route-selector\.four-items \{ display: grid; grid-template-columns: repeat\(2,minmax\(0,1fr\)\); overflow: visible; \}/);
   assert.match(css, /\.nav-group:hover \.nav-dropdown/);
   assert.match(css, /@media \(max-width:\s*760px\)/);
   assert.match(css, /@media \(prefers-reduced-motion:\s*reduce\)/);
