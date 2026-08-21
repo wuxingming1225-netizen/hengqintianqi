@@ -148,7 +148,8 @@ test("keeps type, navigation and responsive presentation consistent", async () =
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.nav-group > a\s*\{[^}]*height:\s*56px/s);
   assert.match(css, /\.image-lightbox\s*\{/);
   assert.match(css, /\.team-info dl \.team-service\s*\{[^}]*border-left:\s*2px solid var\(--gold\);[^}]*background:\s*var\(--pale\)/s);
-  assert.match(css, /@media \(max-width:\s*520px\)[\s\S]*?\.team-grid,\.support-section \.team-grid\s*\{[^}]*grid-template-columns:\s*1fr/s);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.team-grid\s*\{[^}]*grid-template-columns:\s*1fr 1fr/s);
+  assert.doesNotMatch(css, /@media \(max-width:\s*520px\)[\s\S]*?\.team-grid/);
   assert.match(css, /\.route-selector \{ position: sticky/);
   assert.match(css, /\.route-selector\.four-items \{ display: grid; grid-template-columns: repeat\(2,minmax\(0,1fr\)\); overflow: visible; \}/);
   assert.match(css, /\.nav-group:hover \.nav-dropdown/);

@@ -288,11 +288,6 @@ footer { padding: 60px 0; color: rgba(255,255,255,.6); background: #101f24; }.fo
 
 @media (prefers-reduced-motion: reduce) { html,.route-slider { scroll-behavior: auto; } *,*::before,*::after { animation: none !important; transition-duration: .01ms !important; } }
 
-@media (max-width: 520px) {
-  .team-grid,.support-section .team-grid { grid-template-columns: 1fr; }
-  .team-info { min-height: 0; }
-}
-
 @media (max-width: 380px) {
   .site-header { padding-inline: 12px; }.site-brand { gap: 8px; }.site-brand strong { font-size: 12px; }.site-brand small { font-size: 7px; letter-spacing: .14em; }.header-actions { gap: 10px; }.header-call { font-size: 7px; }.menu-toggle { min-width: 60px; padding-inline: 2px; }.menu-toggle-label { min-width: 22px; font-size: 10px; }.menu-toggle-icon { width: 21px; }
   .team-grid,.support-section .team-grid { grid-template-columns: 1fr; }
