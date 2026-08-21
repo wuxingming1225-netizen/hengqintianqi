@@ -119,7 +119,7 @@ export function SiteFooter() {
       <div className="page-shell footer-inner">
         <a className="footer-brand" href={pageHref("/")}><span className="footer-logo"><img src={asset("/t3-building-logo-transparent.webp")} alt="" width="256" height="542" loading="lazy" decoding="async" /></span><span>横琴天啟 T3<br /><small>PROPERTY SERVICE</small></span></a>
         <div className="footer-details">
-          <p>珠海华发物业服务有限公司</p>
+          <p>华发物业服务有限公司</p>
           <p className="footer-address"><span>项目地址</span><strong>珠海市横琴粤澳深度合作区荣澳道 128 号</strong></p>
         </div>
         <p>© 2026 HUAFA PROPERTY. ALL RIGHTS RESERVED.</p>

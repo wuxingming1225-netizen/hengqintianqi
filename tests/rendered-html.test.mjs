@@ -29,7 +29,9 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.match(project, /7×24 小时无间断安全管理，实时掌握楼宇安全动态。/);
   assert.doesNotMatch(project, /中央监控系统|身份识别系统|先进设备/);
   assert.doesNotMatch(project, /夜间货物进出|人车分流|客货分流|物流交接效率/);
-  assert.match(project, /横琴天啟（华发）跨境电商产业园拓展区又名华发天啟 T3 栋，项目位于珠海市横琴粤澳深度合作区境内，占位横琴金融岛金边三公里CBD核心地段，背靠小横琴山，与澳门隔海相望，奢享一线揽澳海景，兼有较佳的海景、山景、园景、城市景观，具有得天独厚的区位优势和无可比拟的景观优势。/);
+  assert.match(project, /横琴粤澳深度合作区\(华发\)跨境电商产业园拓展区又名华发天啟 T3 栋，项目位于珠海市横琴粤澳深度合作区境内，占位横琴金融岛金边三公里CBD核心地段，背靠小横琴山，与澳门隔海相望，奢享一线揽澳海景，兼有较佳的海景、山景、园景、城市景观，具有得天独厚的区位优势和无可比拟的景观优势。/);
+  assert.match(project, /华发物业服务有限公司/);
+  assert.doesNotMatch(project, /珠海华发物业服务有限公司/);
   assert.match(project, /项目地址/);
   assert.match(project, /珠海市横琴粤澳深度合作区荣澳道 128 号/);
   assert.match(project, /class="header-actions"[\s\S]*?class="header-call"[^>]*>[\s\S]*?24H 应急热线[\s\S]*?<\/a><button class="menu-toggle"/);
