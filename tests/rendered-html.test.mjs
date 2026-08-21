@@ -117,6 +117,8 @@ test("keeps type, navigation and responsive presentation consistent", async () =
   assert.match(css, /\.monitoring-composition,\.equipment-composition\s*\{[^}]*aspect-ratio:\s*3\/2/s);
   assert.match(css, /\.tight-composition\s*\{[^}]*aspect-ratio:\s*4\/3/s);
   assert.match(css, /\.project-landmark-stats\s*\{[^}]*margin:\s*-88px auto 0/s);
+  assert.match(css, /\.project-about-intro\s*\{[^}]*background:\s*transparent[^}]*box-shadow:\s*none/s);
+  assert.match(css, /\.project-about-intro img\s*\{[^}]*mix-blend-mode:\s*multiply/s);
   assert.match(css, /\.security-photo-composition > img\s*\{[^}]*object-fit:\s*contain/s);
   assert.match(css, /\.project-landmark-heading h2\s*\{[^}]*animation:\s*hero-copy-enter 1\.15s/s);
   assert.match(css, /\.header-call\s*\{[^}]*display:\s*flex/s);
