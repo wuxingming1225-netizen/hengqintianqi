@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 type LightboxImage = {
   src: string;
   alt: string;
+  zoom: boolean;
 };
 
 export default function ImageLightbox() {
@@ -24,6 +25,7 @@ export default function ImageLightbox() {
       setImage({
         src: link.href,
         alt: preview?.alt ?? "清晰原图",
+        zoom: link.dataset.lightboxMode === "zoom",
       });
     };
 
@@ -44,7 +46,7 @@ export default function ImageLightbox() {
 
   return (
     <dialog
-      className="image-lightbox"
+      className={image?.zoom ? "image-lightbox is-zoomable" : "image-lightbox"}
       ref={dialogRef}
       onClose={() => setImage(null)}
       onClick={(event) => {

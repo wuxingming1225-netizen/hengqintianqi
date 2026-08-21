@@ -33,17 +33,21 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.match(project, /华发物业服务有限公司/);
   assert.doesNotMatch(project, /珠海华发物业服务有限公司/);
   assert.match(project, /huafa-property-logo\.jpg/);
+  assert.match(project, /华发物业服务有限公司，隶属华发集团公司，国家一级资质物业管理企业。华发物业，创立于 1985 年/);
   assert.match(project, /项目地址/);
   assert.match(project, /珠海市横琴粤澳深度合作区荣澳道 128 号/);
   assert.match(project, /class="header-actions"[\s\S]*?class="header-call"[^>]*>[\s\S]*?24H 应急热线[\s\S]*?<\/a><button class="menu-toggle"/);
   assert.doesNotMatch(project, /项目紧临横琴金融基地/);
   assert.doesNotMatch(project, /class="rainy-section"|class="content-section team-section/);
 
-  for (const text of ["臻品服务", "消杀服务", "雨天暖心服务"])
+  for (const text of ["臻品服务", "消杀服务", "雨天暖心服务", "有偿服务价格公示表"])
     assert.match(services, new RegExp(text));
   assert.match(services, /premium-supplies-v2\.webp/);
   assert.match(services, /sanitation-service-single\.webp/);
   assert.match(services, /service-hero-reception\.webp/);
+  assert.match(services, /paid-service-price-list\.jpg/);
+  assert.match(services, /data-lightbox="image"/);
+  assert.match(services, /data-lightbox-mode="zoom"/);
   assert.doesNotMatch(services, /class="parking-access-section"|服务影像预留|class="security-section"/);
 
   for (const text of ["停车与通行", "访客与闸机通行", "临时报备停车", "停车月卡申请", "停车月卡缴费", "停车场指引", "货梯路线指引", "外卖点指引"])
@@ -78,7 +82,7 @@ test("keeps major information on separate IFC-style pages", async () => {
 
 test("keeps required image assets available", async () => {
   const files = [
-    "t3-building.webp", "t3-building-logo-transparent.webp", "t3-building-lineart.webp", "premium-supplies-v2.webp", "sanitation-service-single.webp", "security-monitoring-complete.jpg", "security-emergency-drill-complete.jpg", "equipment-inspection-complete.jpg", "service-hero-reception.webp", "routes-hero-security.webp", "t3-property-poster-v1.png", "t3-property-poster-hengqintianqi.png",
+    "t3-building.webp", "t3-building-logo-transparent.webp", "t3-building-lineart.webp", "premium-supplies-v2.webp", "sanitation-service-single.webp", "security-monitoring-complete.jpg", "security-emergency-drill-complete.jpg", "equipment-inspection-complete.jpg", "service-hero-reception.webp", "routes-hero-security.webp", "paid-service-price-list.jpg", "t3-property-poster-v1.png", "t3-property-poster-hengqintianqi.png",
     "shared-umbrella-station.webp", "umbrella-sleeve-machine.webp", "umbrella-dryer.webp", "shoe-polisher.webp",
     "access-gate-preview.jpg", "temporary-parking-entrance-preview.webp", "parking-apply.webp", "parking-apply.jpg", "parking-renewal.webp", "parking-renewal.jpg",
     ...Array.from({ length: 13 }, (_, index) => `parking-route-step-${String(index + 1).padStart(2, "0")}.webp`),
@@ -119,6 +123,9 @@ test("keeps type, navigation and responsive presentation consistent", async () =
   assert.match(css, /\.project-landmark-stats\s*\{[^}]*margin:\s*-88px auto 0/s);
   assert.match(css, /\.project-about-intro\s*\{[^}]*background:\s*transparent[^}]*box-shadow:\s*none/s);
   assert.match(css, /\.project-about-intro img\s*\{[^}]*mix-blend-mode:\s*multiply/s);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.floor-row strong,.office-title strong,.refuge-row strong\s*\{[^}]*font-size:\s*15px/s);
+  assert.match(css, /\.paid-services-section\s*\{/);
+  assert.match(css, /\.image-lightbox\.is-zoomable \.image-lightbox-frame img\s*\{/);
   assert.match(css, /\.security-photo-composition > img\s*\{[^}]*object-fit:\s*contain/s);
   assert.match(css, /\.project-landmark-heading h2\s*\{[^}]*animation:\s*hero-copy-enter 1\.15s/s);
   assert.match(css, /\.header-call\s*\{[^}]*display:\s*flex/s);

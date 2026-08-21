@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { asset } from "../assets";
+import ImageLightbox from "../image-lightbox";
 import { PageHero, SectionTitle, SiteFooter, SiteHeader } from "../site-chrome";
 
 const rainyServices = [
@@ -18,7 +19,7 @@ export default function ServicesPage() {
 
       <section className="content-section page-shell">
         <SectionTitle eyebrow="OUR SERVICE" title="以专业回应每一次需要" intro="从日常所需到环境维护，华发物业用统一标准与细致服务，守护舒适、有序的办公体验。" />
-        <nav className="inner-nav three-items" aria-label="服务分类"><a href="#premium">臻品服务</a><a href="#sanitation">消杀服务</a><a href="#rainy">雨天暖心服务</a></nav>
+        <nav className="inner-nav" aria-label="服务分类"><a href="#premium">臻品服务</a><a href="#sanitation">消杀服务</a><a href="#rainy">雨天暖心服务</a><a href="#paid-services">有偿服务价格公示表</a></nav>
       </section>
 
       <section className="service-block page-shell" id="premium">
@@ -40,6 +41,17 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <section className="paid-services-section" id="paid-services">
+        <div className="page-shell">
+          <SectionTitle eyebrow="PAID SERVICE PRICE LIST" title="有偿服务价格公示表" intro="点击图片可放大查看完整收费标准。" />
+          <a className="paid-service-poster" href={asset("/paid-service-price-list.jpg")} data-lightbox="image" data-lightbox-mode="zoom">
+            <img src={asset("/paid-service-price-list.jpg")} alt="华发物业商办横琴天啟项目有偿服务收费标准" width="2160" height="1280" loading="lazy" decoding="async" />
+            <span>点击图片放大查看</span>
+          </a>
+        </div>
+      </section>
+
+      <ImageLightbox />
       <SiteFooter />
     </main>
   );

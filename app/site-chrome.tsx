@@ -15,6 +15,8 @@ const revealSelector = [
   ".service-block",
   ".rainy-section .section-title",
   ".rainy-grid article",
+  ".paid-services-section .section-title",
+  ".paid-service-poster",
   ".team-section .section-title",
   ".team-card",
   ".support-section .section-title",
@@ -70,6 +72,7 @@ export function SiteHeader({ active }: { active: Section }) {
             <a href={pageHref("/services/#premium")} onClick={close}>臻品服务</a>
             <a href={pageHref("/services/#sanitation")} onClick={close}>消杀服务</a>
             <a href={pageHref("/services/#rainy")} onClick={close}>雨天暖心服务</a>
+            <a href={pageHref("/services/#paid-services")} onClick={close}>有偿服务价格公示表</a>
           </div>
         </div>
         <div className={`nav-group ${active === "routes" ? "active" : ""}`}>
