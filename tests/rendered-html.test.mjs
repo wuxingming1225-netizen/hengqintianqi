@@ -22,15 +22,18 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.doesNotMatch(project, /总用地面积/);
   assert.doesNotMatch(project, /金融岛标杆商务地标|一座楼宇，一群用心的人/);
   assert.doesNotMatch(project, /Tight Management/);
-  assert.match(project, /security-monitoring-v2\.webp/);
-  assert.match(project, /tight-security-management\.webp/);
-  assert.match(project, /equipment-safety\.webp/);
+  assert.match(project, /security-monitoring-complete\.jpg/);
+  assert.match(project, /security-emergency-drill-complete\.jpg/);
+  assert.match(project, /equipment-inspection-complete\.jpg/);
   assert.match(project, /project-landmark project-landmark-full/);
   assert.match(project, /7×24 小时无间断安全管理，实时掌握楼宇安全动态。/);
   assert.doesNotMatch(project, /中央监控系统|身份识别系统|先进设备/);
   assert.doesNotMatch(project, /夜间货物进出|人车分流|客货分流|物流交接效率/);
   assert.match(project, /横琴天啟（华发）跨境电商产业园拓展区又名华发天啟 T3 栋，项目位于珠海市横琴粤澳深度合作区境内，占位横琴金融岛金边三公里CBD核心地段，背靠小横琴山，与澳门隔海相望，奢享一线揽澳海景，兼有较佳的海景、山景、园景、城市景观，具有得天独厚的区位优势和无可比拟的景观优势。/);
-  assert.doesNotMatch(project, /荣澳道 128 号|项目紧临横琴金融基地/);
+  assert.match(project, /项目地址/);
+  assert.match(project, /珠海市横琴粤澳深度合作区荣澳道 128 号/);
+  assert.match(project, /class="header-call"[^>]*>[\s\S]*?24H 应急热线[\s\S]*?<\/a><button class="menu-toggle"/);
+  assert.doesNotMatch(project, /项目紧临横琴金融基地/);
   assert.doesNotMatch(project, /class="rainy-section"|class="content-section team-section/);
 
   for (const text of ["甄品服务", "消杀服务", "雨天暖心服务"])
@@ -70,7 +73,7 @@ test("keeps major information on separate IFC-style pages", async () => {
 
 test("keeps required image assets available", async () => {
   const files = [
-    "t3-building.webp", "t3-building-logo-transparent.webp", "t3-building-lineart.webp", "premium-supplies-v2.webp", "sanitation-service-single.webp", "security-monitoring-v2.webp", "tight-security-management.webp", "equipment-safety.webp", "service-hero-reception.webp", "routes-hero-security.webp", "t3-property-poster-v1.png", "t3-property-poster-hengqintianqi.png",
+    "t3-building.webp", "t3-building-logo-transparent.webp", "t3-building-lineart.webp", "premium-supplies-v2.webp", "sanitation-service-single.webp", "security-monitoring-complete.jpg", "security-emergency-drill-complete.jpg", "equipment-inspection-complete.jpg", "service-hero-reception.webp", "routes-hero-security.webp", "t3-property-poster-v1.png", "t3-property-poster-hengqintianqi.png",
     "shared-umbrella-station.webp", "umbrella-sleeve-machine.webp", "umbrella-dryer.webp", "shoe-polisher.webp",
     "access-gate-preview.jpg", "temporary-parking-entrance-preview.webp", "parking-apply.webp", "parking-apply.jpg", "parking-renewal.webp", "parking-renewal.jpg",
     ...Array.from({ length: 13 }, (_, index) => `parking-route-step-${String(index + 1).padStart(2, "0")}.webp`),
@@ -105,6 +108,10 @@ test("keeps type, navigation and responsive presentation consistent", async () =
   assert.match(css, /\.parking-zone-selector/);
   assert.match(css, /\.monitoring-composition,\.equipment-composition\s*\{[^}]*aspect-ratio:\s*3\/2/s);
   assert.match(css, /\.tight-composition\s*\{[^}]*aspect-ratio:\s*4\/3/s);
+  assert.match(css, /\.project-landmark-stats\s*\{[^}]*margin:\s*-88px auto 0/s);
+  assert.match(css, /\.security-photo-composition > img\s*\{[^}]*object-fit:\s*contain/s);
+  assert.match(css, /\.project-landmark-heading h2\s*\{[^}]*animation:\s*hero-copy-enter 1\.15s/s);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.header-call\s*\{[^}]*display:\s*flex;[^}]*font-size:\s*8px/s);
   assert.match(css, /\.image-lightbox\s*\{/);
   assert.match(css, /\.route-selector \{ position: sticky/);
   assert.match(css, /\.route-selector\.four-items \{ display: grid; grid-template-columns: repeat\(2,minmax\(0,1fr\)\); overflow: visible; \}/);

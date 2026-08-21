@@ -17,7 +17,6 @@ export function SiteHeader({ active }: { active: Section }) {
         <span className="site-brand-mark"><img src={asset("/t3-building-logo-transparent.webp")} alt="" width="256" height="542" decoding="async" /></span>
         <span><strong>横琴天啟 T3</strong><small>PROPERTY SERVICE</small></span>
       </a>
-      <button className="menu-toggle" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="打开导航"><span /><span /></button>
       <nav className={open ? "main-nav is-open" : "main-nav"} aria-label="主导航" onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
         <div className={`nav-group ${active === "project" ? "active" : ""}`}>
           <a href={pageHref("/")} onClick={close}>横琴T3</a>
@@ -43,6 +42,7 @@ export function SiteHeader({ active }: { active: Section }) {
         <div className={`nav-group ${active === "contact" ? "active" : ""}`}><a href={pageHref("/contact/")} onClick={close}>联系我们</a></div>
       </nav>
       <a className="header-call" href="tel:07568696992"><span />24H 应急热线</a>
+      <button className="menu-toggle" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="打开导航"><span /><span /></button>
     </header>
   );
 }
@@ -71,7 +71,10 @@ export function SiteFooter() {
     <footer>
       <div className="page-shell footer-inner">
         <a className="footer-brand" href={pageHref("/")}><span className="footer-logo"><img src={asset("/t3-building-logo-transparent.webp")} alt="" width="256" height="542" loading="lazy" decoding="async" /></span><span>横琴天啟 T3<br /><small>PROPERTY SERVICE</small></span></a>
-        <p>珠海华发物业服务有限公司</p>
+        <div className="footer-details">
+          <p>珠海华发物业服务有限公司</p>
+          <p className="footer-address"><span>项目地址</span><strong>珠海市横琴粤澳深度合作区荣澳道 128 号</strong></p>
+        </div>
         <p>© 2026 HUAFA PROPERTY. ALL RIGHTS RESERVED.</p>
       </div>
     </footer>
