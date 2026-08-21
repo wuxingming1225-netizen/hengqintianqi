@@ -78,6 +78,10 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.match(contact, /写字楼11–17 \/ 21–22 \/ 41–49层/);
   assert.match(contact, /13226026617/);
   assert.match(contact, /17368289843/);
+  assert.match(contact, /href="tel:13543226860"[^>]*>13543226860<\/a>/);
+  assert.match(contact, /href="tel:13612200521"[^>]*>13612200521<\/a>/);
+  for (const service of ["事项督办/协调、应急统筹、意见受理", "诉求跟进、合同/装修办理、表单推送、增值服务", "统筹选品中心（秩序维护、会议室预约）", "来访登记、门禁授权、诉求转达、便民物品借用", "访客接待、会场保障、需求响应", "督办工单、维保统筹、设施总管", "秩序总控、隐患督办、安防统筹"])
+    assert.ok(contact.includes(service), service);
 });
 
 test("keeps required image assets available", async () => {
@@ -143,6 +147,8 @@ test("keeps type, navigation and responsive presentation consistent", async () =
   assert.doesNotMatch(css, /\.main-nav\s*\{[^}]*backdrop-filter:\s*blur/s);
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.nav-group > a\s*\{[^}]*height:\s*56px/s);
   assert.match(css, /\.image-lightbox\s*\{/);
+  assert.match(css, /\.team-info dl \.team-service\s*\{[^}]*border-left:\s*2px solid var\(--gold\);[^}]*background:\s*var\(--pale\)/s);
+  assert.match(css, /@media \(max-width:\s*520px\)[\s\S]*?\.team-grid,\.support-section \.team-grid\s*\{[^}]*grid-template-columns:\s*1fr/s);
   assert.match(css, /\.route-selector \{ position: sticky/);
   assert.match(css, /\.route-selector\.four-items \{ display: grid; grid-template-columns: repeat\(2,minmax\(0,1fr\)\); overflow: visible; \}/);
   assert.match(css, /\.nav-group:hover \.nav-dropdown/);
