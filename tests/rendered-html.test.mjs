@@ -64,6 +64,8 @@ test("keeps major information on separate IFC-style pages", async () => {
   for (const person of ["吴幸明", "曾令慧", "何思慧", "刘大平", "周芷盈", "梁盼盼", "刘嘉欣", "刘六虎", "侯焕武"])
     assert.match(contact, new RegExp(person));
   assert.match(contact, /专业支持团队/);
+  assert.match(contact, /contact-hero\.jpg/);
+  assert.match(contact, /page-hero home-hero/);
   assert.match(contact, /0756-8696992/);
   assert.match(contact, /写字楼18–19 \/ 23–39层/);
   assert.match(contact, /写字楼11–17 \/ 21–22 \/ 41–49层/);
