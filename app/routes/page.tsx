@@ -4,6 +4,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { asset } from "../assets";
+import ImageLightbox from "../image-lightbox";
 import { PageHero, SectionTitle, SiteFooter, SiteHeader } from "../site-chrome";
 
 type RouteSlide = readonly [image: string, title: string, text: string];
@@ -211,7 +212,7 @@ export default function RoutesPage() {
           <div className="subsection-heading"><span>PARKING & ACCESS</span><h2>停车与通行</h2><p>从来访报备到月卡办理，常用事项集中查看。</p></div>
           <div className="parking-access-grid">{parkingAccess.map((item) => <article className={item.fullImage ? "has-clear-image" : undefined} key={item.title}>
             <div className="parking-access-media">{item.fullImage
-              ? <a className="parking-clear-link" href={asset(item.fullImage)} target="_blank" rel="noreferrer" aria-label={`${item.title}：在新窗口打开清晰原图`}><img src={asset(item.image)} alt={`${item.title}流程图，含小程序码`} loading="lazy" decoding="async" /><span className="parking-clear-cta">查看清晰原图 · 长按识别小程序码 ↗</span></a>
+              ? <a className="parking-clear-link" href={asset(item.fullImage)} data-lightbox="image" aria-label={`${item.title}：在本页放大查看清晰原图`}><img src={asset(item.image)} alt={`${item.title}流程图，含小程序码`} loading="lazy" decoding="async" /><span className="parking-clear-cta">点击本页放大 · 长按识别小程序码</span></a>
               : <img src={asset(item.image)} alt={item.title} loading="lazy" decoding="async" />}</div>
             <span>{item.eyebrow}</span><h3>{item.title}</h3><ol>{item.items.map((text) => <li key={text}>{text}</li>)}</ol>
           </article>)}</div>
@@ -232,6 +233,7 @@ export default function RoutesPage() {
         </div>}
       </section>
 
+      <ImageLightbox />
       <SiteFooter />
     </main>
   );

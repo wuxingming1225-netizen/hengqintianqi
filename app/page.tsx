@@ -22,7 +22,7 @@ export default function ProjectPage() {
       <SiteHeader active="project" />
 
       <section className="project-about">
-        <div className="page-shell project-landmark">
+        <div className="page-shell project-landmark project-landmark-full">
           <div className="project-landmark-feature">
             <div className="project-landmark-heading">
               <strong aria-hidden="true">ABOUT<br />HENGQIN T3</strong>

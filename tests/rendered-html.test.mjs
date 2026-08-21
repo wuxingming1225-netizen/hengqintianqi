@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
 const projectRoot = new URL("../", import.meta.url);
@@ -25,6 +25,7 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.match(project, /security-monitoring-v2\.webp/);
   assert.match(project, /tight-security-management\.webp/);
   assert.match(project, /equipment-safety\.webp/);
+  assert.match(project, /project-landmark project-landmark-full/);
   assert.match(project, /7×24 小时无间断安全管理，实时掌握楼宇安全动态。/);
   assert.doesNotMatch(project, /中央监控系统|身份识别系统|先进设备/);
   assert.doesNotMatch(project, /夜间货物进出|人车分流|客货分流|物流交接效率/);
@@ -45,8 +46,9 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.match(routes, /routes-hero-security\.webp/);
   assert.match(routes, /parking-apply\.jpg/);
   assert.match(routes, /parking-renewal\.jpg/);
-  assert.match(routes, /查看清晰原图 · 长按识别小程序码/);
-  assert.match(routes, /target="_blank"/);
+  assert.match(routes, /点击本页放大 · 长按识别小程序码/);
+  assert.match(routes, /data-lightbox="image"/);
+  assert.doesNotMatch(routes, /在新窗口打开|target="_blank"/);
   assert.match(routes, /\?view=access/);
   for (const text of ["四个办公分区停车指引", "低区", "11–16F", "中区", "17–27F", "高区", "28–38F", "超高区", "39–49F", "B1 推荐路线", "B2 / B3 路线"])
     assert.match(routesSource, new RegExp(text));
@@ -78,6 +80,17 @@ test("keeps required image assets available", async () => {
   await Promise.all(files.map((file) => access(new URL(`public/${file}`, projectRoot))));
 });
 
+test("keeps route guidance images lightweight", async () => {
+  const files = [
+    ...Array.from({ length: 13 }, (_, index) => `parking-route-step-${String(index + 1).padStart(2, "0")}.webp`),
+    ...Array.from({ length: 6 }, (_, index) => `freight-step-${index + 1}.webp`),
+    "takeout-step-1.webp", "takeout-step-2.webp", "takeout-step-3.webp",
+  ];
+  const sizes = await Promise.all(files.map((file) => stat(new URL(`public/${file}`, projectRoot)).then((result) => result.size)));
+  assert.ok(sizes.every((size) => size < 200_000), "each route image should stay below 200 KB");
+  assert.ok(sizes.reduce((total, size) => total + size, 0) < 1_700_000, "route image set should stay below 1.7 MB");
+});
+
 test("keeps type, navigation and responsive presentation consistent", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /--display:\s*42px/);
@@ -90,6 +103,9 @@ test("keeps type, navigation and responsive presentation consistent", async () =
   const viewTimelineBlock = css.match(/@supports \(animation-timeline:\s*view\(\)\)\s*\{([\s\S]*?)\n\}/)?.[1] ?? "";
   assert.doesNotMatch(viewTimelineBlock, /security-story|tight-story/);
   assert.match(css, /\.parking-zone-selector/);
+  assert.match(css, /\.monitoring-composition,\.equipment-composition\s*\{[^}]*aspect-ratio:\s*3\/2/s);
+  assert.match(css, /\.tight-composition\s*\{[^}]*aspect-ratio:\s*4\/3/s);
+  assert.match(css, /\.image-lightbox\s*\{/);
   assert.match(css, /\.route-selector \{ position: sticky/);
   assert.match(css, /\.route-selector\.four-items \{ display: grid; grid-template-columns: repeat\(2,minmax\(0,1fr\)\); overflow: visible; \}/);
   assert.match(css, /\.nav-group:hover \.nav-dropdown/);
