@@ -18,12 +18,12 @@ export default function ServicesPage() {
 
       <section className="content-section page-shell">
         <SectionTitle eyebrow="OUR SERVICE" title="以专业回应每一次需要" intro="从日常所需到环境维护，华发物业用统一标准与细致服务，守护舒适、有序的办公体验。" />
-        <nav className="inner-nav three-items" aria-label="服务分类"><a href="#premium">甄品服务</a><a href="#sanitation">消杀服务</a><a href="#rainy">雨天暖心服务</a></nav>
+        <nav className="inner-nav three-items" aria-label="服务分类"><a href="#premium">臻品服务</a><a href="#sanitation">消杀服务</a><a href="#rainy">雨天暖心服务</a></nav>
       </section>
 
       <section className="service-block page-shell" id="premium">
         <div className="service-photo premium-photo"><img src={asset("/premium-supplies-v2.webp")} alt="T3 大堂臻品物资箱" width="1400" height="800" loading="lazy" decoding="async" /><span>01</span></div>
-        <div className="service-text"><span>PREMIUM SERVICE</span><h2>甄品服务</h2><p>大堂臻品物资箱为客户提供干湿纸巾、女性用品、雨衣、针线包、后跟贴、漱口水、一次性毛巾、吹风机、充电宝、测温枪与日常维修工具等暖心物资。</p><ul><li>应急物品随取随用</li><li>便民物品登记借用</li><li>一楼大堂统一提供</li></ul></div>
+        <div className="service-text"><span>PREMIUM SERVICE</span><h2>臻品服务</h2><p>大堂臻品物资箱为客户提供干湿纸巾、女性用品、雨衣、针线包、后跟贴、漱口水、一次性毛巾、吹风机、充电宝、测温枪与日常维修工具等暖心物资。</p><ul><li>应急物品随取随用</li><li>便民物品登记借用</li><li>一楼大堂统一提供</li></ul></div>
       </section>
 
       <section className="service-block reverse compact-service page-shell" id="sanitation">

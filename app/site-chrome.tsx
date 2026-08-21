@@ -67,7 +67,7 @@ export function SiteHeader({ active }: { active: Section }) {
         <div className={`nav-group ${active === "services" ? "active" : ""}`}>
           <a href={pageHref("/services/")} onClick={close}>服务信息</a>
           <div className="nav-dropdown">
-            <a href={pageHref("/services/#premium")} onClick={close}>甄品服务</a>
+            <a href={pageHref("/services/#premium")} onClick={close}>臻品服务</a>
             <a href={pageHref("/services/#sanitation")} onClick={close}>消杀服务</a>
             <a href={pageHref("/services/#rainy")} onClick={close}>雨天暖心服务</a>
           </div>
