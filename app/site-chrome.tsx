@@ -2,10 +2,52 @@
 
 /* eslint-disable @next/next/no-img-element */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { asset, pageHref } from "./assets";
 
 type Section = "project" | "services" | "routes" | "contact";
+
+const revealSelector = [
+  ".project-landmark-feature",
+  ".project-landmark-stats",
+  ".project-about-copy",
+  ".building-card",
+  ".service-block",
+  ".rainy-section .section-title",
+  ".rainy-grid article",
+  ".team-section .section-title",
+  ".team-card",
+  ".support-section .section-title",
+  ".route-page > .section-title",
+  ".parking-access-grid article",
+  ".parking-zone-panel",
+  ".contact-panel",
+].join(",");
+
+export function ScrollRevealEffects() {
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll<HTMLElement>(revealSelector));
+    elements.forEach((element) => element.classList.add("reveal-item"));
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        requestAnimationFrame(() => entry.target.classList.add("is-visible"));
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8%", threshold: 0.06 });
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
+  return null;
+}
 
 export function SiteHeader({ active }: { active: Section }) {
   const [open, setOpen] = useState(false);
@@ -19,7 +61,7 @@ export function SiteHeader({ active }: { active: Section }) {
       </a>
       <nav className={open ? "main-nav is-open" : "main-nav"} aria-label="主导航" onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
         <div className={`nav-group ${active === "project" ? "active" : ""}`}>
-          <a href={pageHref("/")} onClick={close}>横琴T3</a>
+          <a href={pageHref("/")} onClick={close}>横琴天啟T3</a>
           <div className="nav-dropdown"><a href={pageHref("/#overview")} onClick={close}>项目概况</a><a href={pageHref("/#security-management")} onClick={close}>24小时安全管理</a></div>
         </div>
         <div className={`nav-group ${active === "services" ? "active" : ""}`}>
@@ -41,8 +83,13 @@ export function SiteHeader({ active }: { active: Section }) {
         </div>
         <div className={`nav-group ${active === "contact" ? "active" : ""}`}><a href={pageHref("/contact/")} onClick={close}>联系我们</a></div>
       </nav>
-      <a className="header-call" href="tel:07568696992"><span />24H 应急热线</a>
-      <button className="menu-toggle" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="打开导航"><span /><span /></button>
+      <div className="header-actions">
+        <a className="header-call" href="tel:07568696992"><span />24H 应急热线</a>
+        <button className="menu-toggle" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label={open ? "关闭导航" : "打开导航"}>
+          <span className="menu-toggle-label">{open ? "关闭" : "菜单"}</span>
+          <span className="menu-toggle-icon" aria-hidden="true"><span /><span /></span>
+        </button>
+      </div>
     </header>
   );
 }

@@ -32,7 +32,7 @@ test("keeps major information on separate IFC-style pages", async () => {
   assert.match(project, /横琴天啟（华发）跨境电商产业园拓展区又名华发天啟 T3 栋，项目位于珠海市横琴粤澳深度合作区境内，占位横琴金融岛金边三公里CBD核心地段，背靠小横琴山，与澳门隔海相望，奢享一线揽澳海景，兼有较佳的海景、山景、园景、城市景观，具有得天独厚的区位优势和无可比拟的景观优势。/);
   assert.match(project, /项目地址/);
   assert.match(project, /珠海市横琴粤澳深度合作区荣澳道 128 号/);
-  assert.match(project, /class="header-call"[^>]*>[\s\S]*?24H 应急热线[\s\S]*?<\/a><button class="menu-toggle"/);
+  assert.match(project, /class="header-actions"[\s\S]*?class="header-call"[^>]*>[\s\S]*?24H 应急热线[\s\S]*?<\/a><button class="menu-toggle"/);
   assert.doesNotMatch(project, /项目紧临横琴金融基地/);
   assert.doesNotMatch(project, /class="rainy-section"|class="content-section team-section/);
 
@@ -96,22 +96,38 @@ test("keeps route guidance images lightweight", async () => {
 
 test("keeps type, navigation and responsive presentation consistent", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const siteChrome = await readFile(new URL("../app/site-chrome.tsx", import.meta.url), "utf8");
   assert.match(css, /--display:\s*42px/);
   assert.match(css, /--heading:\s*32px/);
   assert.match(css, /scroll-snap-type:\s*x mandatory/);
   assert.match(css, /scroll-behavior:\s*smooth/);
-  assert.match(css, /animation-timeline:\s*view\(\)/);
-  const revealKeyframes = css.match(/@keyframes ifc-reveal\s*\{([\s\S]*?)\n\}/)?.[1] ?? "";
-  assert.match(revealKeyframes, /filter:\s*blur\(/);
-  const viewTimelineBlock = css.match(/@supports \(animation-timeline:\s*view\(\)\)\s*\{([\s\S]*?)\n\}/)?.[1] ?? "";
-  assert.doesNotMatch(viewTimelineBlock, /security-story|tight-story/);
+  assert.match(siteChrome, /IntersectionObserver/);
+  assert.match(siteChrome, /reveal-item/);
+  assert.match(siteChrome, /is-visible/);
+  assert.match(css, /\.reveal-item\s*\{[^}]*filter:\s*blur\(4px\)/s);
+  assert.match(css, /\.reveal-item\.is-visible\s*\{[^}]*filter:\s*blur\(0\)/s);
+  assert.match(css, /@media \(hover:\s*none\),\s*\(pointer:\s*coarse\)[\s\S]*?\.reveal-item\s*\{[^}]*filter:\s*none/s);
+  assert.doesNotMatch(css, /animation-timeline:\s*view\(\)/);
   assert.match(css, /\.parking-zone-selector/);
   assert.match(css, /\.monitoring-composition,\.equipment-composition\s*\{[^}]*aspect-ratio:\s*3\/2/s);
   assert.match(css, /\.tight-composition\s*\{[^}]*aspect-ratio:\s*4\/3/s);
   assert.match(css, /\.project-landmark-stats\s*\{[^}]*margin:\s*-88px auto 0/s);
   assert.match(css, /\.security-photo-composition > img\s*\{[^}]*object-fit:\s*contain/s);
   assert.match(css, /\.project-landmark-heading h2\s*\{[^}]*animation:\s*hero-copy-enter 1\.15s/s);
-  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.header-call\s*\{[^}]*display:\s*flex;[^}]*font-size:\s*8px/s);
+  assert.match(css, /\.header-call\s*\{[^}]*display:\s*flex/s);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.header-call\s*\{[^}]*font-size:\s*8px/s);
+  assert.match(siteChrome, /open \? "\u5173\u95ed" : "\u83dc\u5355"/);
+  assert.match(siteChrome, /className="header-actions"/);
+  assert.match(siteChrome, />\u6a2a\u7434\u5929\u555fT3<\/a>/);
+  assert.match(css, /\.menu-toggle-label\s*\{/);
+  assert.match(css, /\.menu-toggle-icon\s*\{/);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.header-actions\s*\{[^}]*gap:\s*18px/s);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.menu-toggle-label\s*\{[^}]*place-items:\s*center/s);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.menu-toggle-icon\s*\{[^}]*height:\s*24px;[^}]*justify-content:\s*center/s);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.main-nav\s*\{[^}]*padding:\s*8px 22px 32px clamp\(68px,18vw,92px\)/s);
+  assert.match(css, /\.main-nav\s*\{[^}]*backdrop-filter:\s*none;[^}]*transform:\s*translate3d\(100%,0,0\);[^}]*contain:\s*paint/s);
+  assert.doesNotMatch(css, /\.main-nav\s*\{[^}]*backdrop-filter:\s*blur/s);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.nav-group > a\s*\{[^}]*height:\s*56px/s);
   assert.match(css, /\.image-lightbox\s*\{/);
   assert.match(css, /\.route-selector \{ position: sticky/);
   assert.match(css, /\.route-selector\.four-items \{ display: grid; grid-template-columns: repeat\(2,minmax\(0,1fr\)\); overflow: visible; \}/);

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ScrollRevealEffects } from "./site-chrome";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-CN">
-      <body>{children}</body>
+      <body>{children}<ScrollRevealEffects /></body>
     </html>
   );
 }
